@@ -12,8 +12,8 @@ const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
 
 var speed = 0.0
-const WALK_SPEED = 3.0
-const SPRINT_SPEED = 5.0
+const WALK_SPEED = 4.0
+const SPRINT_SPEED = 7.0
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
 
