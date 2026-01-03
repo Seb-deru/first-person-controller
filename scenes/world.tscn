@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://14tqrp4n2174"]
+[gd_scene load_steps=11 format=3 uid="uid://14tqrp4n2174"]
 
 [ext_resource type="Script" uid="uid://cr0jadobarib6" path="res://scripts/player.gd" id="1_nnsk1"]
 
@@ -14,6 +14,18 @@ background_mode = 2
 sky = SubResource("Sky_4wyf3")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnsk1"]
+albedo_color = Color(0, 0.76862746, 0.33333334, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwgxs"]
+albedo_color = Color(0.78039217, 0.011764706, 0.09411765, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wyf3"]
+albedo_color = Color(0.56112355, 0.27888182, 0.8932797, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0juu"]
+albedo_color = Color(0.61960787, 0.627451, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5uuo"]
 
@@ -33,6 +45,21 @@ environment = SubResource("Environment_k0juu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4995, 0)
 use_collision = true
 size = Vector3(22, 0.001, 19)
+material = SubResource("StandardMaterial3D_nnsk1")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5130577, 0.49949998, 0)
+material = SubResource("StandardMaterial3D_rwgxs")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5130577, 0.69949996, -4)
+size = Vector3(1.5, 1.5, 1.5)
+material = SubResource("StandardMaterial3D_4wyf3")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5130577, 0.99950004, 3)
+size = Vector3(2, 2, 2)
+material = SubResource("StandardMaterial3D_k0juu")
 
 [node name="player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4995, 0)
@@ -46,7 +73,7 @@ mesh = SubResource("CapsuleMesh_e5uuo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("ConvexPolygonShape3D_nnsk1")
 
-[node name="Node3D" type="Node3D" parent="player"]
+[node name="head" type="Node3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6294287, 0)
 
-[node name="Camera3D" type="Camera3D" parent="player/Node3D"]
+[node name="Camera3D" type="Camera3D" parent="player/head"]
