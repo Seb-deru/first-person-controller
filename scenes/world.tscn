@@ -33,13 +33,14 @@ environment = SubResource("Environment_k0juu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4995, 0)
 size = Vector3(22, 0.001, 19)
 
-[node name="player" type="CharacterBody3D" parent="CSGBox3D"]
+[node name="player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4995, 0)
 script = ExtResource("1_nnsk1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CSGBox3D/player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_e5uuo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("ConvexPolygonShape3D_nnsk1")
