@@ -3,8 +3,14 @@ extends CharacterBody3D
 @onready var head: Node3D = $head
 @onready var camera: Camera3D = $head/Camera3D
 
+# bob
+const BOB_FREQ = 2.0
+const BOB_AMP = 0.08
+var t_bob = 0.0
 
-const SPEED = 5.0
+var speed = 0.0
+const WALK_SPEED = 3.0
+const SPRINT_SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
 
@@ -22,6 +28,11 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	if Input.is_action_pressed("run"):
+		speed = SPRINT_SPEED
+	else: 
+		speed = WALK_SPEED
+
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -31,10 +42,19 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
 		velocity.x = 0.0
 		velocity.z = 0.0
+		
+	t_bob += delta * velocity.length() * float(is_on_floor())
+	camera.transform.origin = _headbob(t_bob)
 
 	move_and_slide()
+	
+func _headbob(time: float) -> Vector3:
+	var pos = Vector3()
+	pos.y = sin(time * BOB_FREQ) * BOB_AMP
+	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
+	return pos
